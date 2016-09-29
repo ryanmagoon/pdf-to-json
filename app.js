@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 app.get('/view', (req, res) => {
     let pdfParser = new PDFParser()
     pdfParser.on('pdfParser_dataReady', (pdfData) => {
-        fs.writeFile('./fields.json', JSON.stringify(pdfData))
+        fs.writeFile('./fields.json', JSON.stringify(pdfParser.getAllFieldsTypes()))
         fs.readFile('./fields.json', (err, file) => {
             res.writeHead(200, {'content-type': 'application/json'})
             res.write(file, 'binary')
